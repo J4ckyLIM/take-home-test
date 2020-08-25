@@ -17,5 +17,11 @@ module.exports = class DiscountOffer {
    */
   updateProperty(propertyName, value) {
     this[propertyName] = this[propertyName] + value;
+    // DiscountInPercent can't excess 50
+    if (propertyName === "discountInPercent") {
+      if (this[propertyName] + value > 50) {
+        this[propertyName] = 50;
+      }
+    }
   }
 };
