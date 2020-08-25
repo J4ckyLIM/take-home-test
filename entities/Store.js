@@ -1,7 +1,14 @@
 export class Store {
+  /**
+   * @param {DiscountOffer[]} discountOffers - Array of DiscountOffer object
+   */
   constructor(discountOffers = []) {
     this.discountOffers = discountOffers;
   }
+  /**
+   * Calculates the discount rate of a discount offer
+   * Depending on their property
+   */
   updateDiscounts() {
     for (var i = 0; i < this.discountOffers.length; i++) {
       if (
