@@ -1,4 +1,5 @@
-import { Store, DiscountOffer } from "./store";
+const Store = require("./entities/Store");
+const DiscountOffer = require("./entities/DiscountOffer");
 
 import fs from "fs";
 
