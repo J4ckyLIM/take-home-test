@@ -40,23 +40,27 @@ module.exports = class Store {
       if (this.discountOffers[i].partnerName != "Ilek") {
         this.discountOffers[i].updateProperty("expiresIn", -1);
       }
+      // Expiration date passed
       if (this.discountOffers[i].expiresIn < 0) {
         if (this.discountOffers[i].partnerName != "Naturalia") {
           if (this.discountOffers[i].partnerName != "Vinted") {
             if (this.discountOffers[i].discountInPercent > 0) {
               if (this.discountOffers[i].partnerName != "Ilek") {
-                this.discountOffers[i].updateProperty("discountInPercent", 1);
+                this.discountOffers[i].updateProperty("discountInPercent", -2);
               }
             }
           } else {
+            // Case Vinted
+            // Discount is set to 0
             this.discountOffers[i].updateProperty(
               "discountInPercent",
               -this.discountOffers[i].discountInPercent
             );
           }
         } else {
+          // Case Naturalia
           if (this.discountOffers[i].discountInPercent < 50) {
-            this.discountOffers[i].updateProperty("discountInPercent", 1);
+            this.discountOffers[i].updateProperty("discountInPercent", 2);
           }
         }
       }
