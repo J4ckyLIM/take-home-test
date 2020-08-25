@@ -1,4 +1,4 @@
-export class DiscountOffer {
+module.exports = class DiscountOffer {
   /**
    * @param {string} partnerName - Name of the partner
    * @param {number} expiresIn - Number of date before it expires
@@ -18,4 +18,4 @@ export class DiscountOffer {
   updateProperty(propertyName, value) {
     this[propertyName] = this[propertyName] + value;
   }
-}
+};

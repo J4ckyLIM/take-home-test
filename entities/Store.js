@@ -1,4 +1,4 @@
-export class Store {
+module.exports = class Store {
   /**
    * @param {DiscountOffer[]} discountOffers - Array of DiscountOffer object
    */
@@ -17,8 +17,9 @@ export class Store {
       ) {
         if (this.discountOffers[i].discountInPercent > 0) {
           if (this.discountOffers[i].partnerName != "Ilek") {
-            this.discountOffers[i].discountInPercent =
-              this.discountOffers[i].discountInPercent - 1;
+            /*this.discountOffers[i].discountInPercent =
+              this.discountOffers[i].discountInPercent - 1;*/
+            this.discountOffers[i].updateProperty("discountInPercent", -1);
           }
         }
       } else {
@@ -69,4 +70,4 @@ export class Store {
 
     return this.discountOffers;
   }
-}
+};
