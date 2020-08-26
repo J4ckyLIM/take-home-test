@@ -11,17 +11,23 @@ module.exports = class DiscountOffer {
   }
 
   /**
-   * Update any property with the given value
-   * @param {string} propertyName - Name of the property to update
+   * Update the discount rate given the value in parameter
+   * And decrease the expiresIn value by 1 every day (unless it is already at 0)
    * @param {number} value - Value to add or retrieve to the property
    */
-  updateProperty(propertyName, value) {
-    this[propertyName] = this[propertyName] + value;
+  updateDiscount(value) {
+    if (this.expiresIn > 0) {
+      this.expiresIn = this.expiresIn - 1; // ExpiresIn property decrease every day
+    }
     // DiscountInPercent can't excess 50
-    if (propertyName === "discountInPercent") {
-      if (this[propertyName] + value > 50) {
-        this[propertyName] = 50;
-      }
+    if (this.discountInPercent + value >= 50) {
+      this.discountInPercent = 50;
+    }
+    // DiscountInPercent can't be lower than 0
+    if (this.discountInPercent + value <= 0) {
+      this.discountInPercent = 0;
+    } else {
+      this.discountInPercent = this.discountInPercent + value;
     }
   }
 };
