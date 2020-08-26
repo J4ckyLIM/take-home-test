@@ -40,6 +40,8 @@ module.exports = class Store {
           }
           break;
         case "Ilek":
+          // Ilek discount never expires nor decreases.
+          this.discountOffers.updateDiscount(0, false);
           break;
         case "BackMarket":
           // Discounts decreases twice as fast as normal partners.
