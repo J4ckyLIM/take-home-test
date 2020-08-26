@@ -21,7 +21,7 @@ module.exports = class DiscountOffer {
       this.expiresIn = this.expiresIn - 1; // ExpiresIn property decrease every day
     }
     // DiscountInPercent can't excess 50
-    if (this.discountInPercent + value >= 50) {
+    if (this.discountInPercent + value >= 50 && this.discountInPercent >= 0) {
       this.discountInPercent = 50;
     }
     // DiscountInPercent can't be lower than 0
