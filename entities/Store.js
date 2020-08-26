@@ -14,6 +14,13 @@ module.exports = class Store {
       this.discountOffers[i];
       switch (this.discountOffers[i].partnerName) {
         case "Naturalia":
+          if (this.discountOffers[i].expiresIn > 0) {
+            this.discountOffers[i].updateDiscount(1);
+          }
+          // Case when expiration date has passed
+          else {
+            this.discountOffers[i].updateDiscount(2);
+          }
           break;
         case "Vinted":
           break;
