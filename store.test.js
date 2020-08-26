@@ -22,6 +22,11 @@ describe("Store", () => {
       new Store([new DiscountOffer("Vinted", 8, 30)]).updateDiscounts()
     ).toEqual([new DiscountOffer("Vinted", 7, 32)]);
   });
+  it("should have discount drop to 0 after expiration date", () => {
+    expect(
+      new Store([new DiscountOffer("Vinted", 0, 30)]).updateDiscounts()
+    ).toEqual([new DiscountOffer("Vinted", 0, 0)]);
+  });
   it("should have discount decreased by 2 and expiresIn decreased by 1", () => {
     expect(
       new Store([new DiscountOffer("BackMarket", 15, 42)]).updateDiscounts()
