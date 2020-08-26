@@ -37,4 +37,9 @@ describe("Store", () => {
       new Store([new DiscountOffer("Naturalia", 30, 16)]).updateDiscounts()
     ).toEqual([new DiscountOffer("Naturalia", 29, 17)]);
   });
+  it("should decrease the discount twice as fast after expiration date", () => {
+    expect(
+      new Store([new DiscountOffer("bidule", 0, 15)]).updateDiscounts()
+    ).toEqual([new DiscountOffer("bidule", 0, 13)]);
+  });
 });
