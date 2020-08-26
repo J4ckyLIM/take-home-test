@@ -26,7 +26,7 @@ module.exports = class Store {
           // Discount drops to 0 after the expiration date
           if (this.discountOffers[i].expiresIn === 0) {
             this.discountOffers[i].updateDiscount(
-              -this.discountOffers[i].discountRateInPercent
+              -this.discountOffers[i].discountInPercent
             );
           } else {
             // Discount increases by 2 when there are 10 days or less
