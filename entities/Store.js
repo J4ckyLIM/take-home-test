@@ -24,28 +24,33 @@ module.exports = class Store {
           break;
         case "Vinted":
           // Discount drops to 0 after the expiration date
-          if (this.expiresIn === 0) {
-            this.discountOffers.updateDiscount(-this.discountRateInPercent);
+          if (this.discountOffers[i].expiresIn === 0) {
+            this.discountOffers[i].updateDiscount(
+              -this.discountOffers[i].discountRateInPercent
+            );
           } else {
             // Discount increases by 2 when there are 10 days or less
-            if (this.expiresIn <= 10 && this.expiresIn > 5) {
-              this.discountOffers.updateDiscount(2);
+            if (
+              this.discountOffers[i].expiresIn <= 10 &&
+              this.discountOffers[i].expiresIn > 5
+            ) {
+              this.discountOffers[i].updateDiscount(2);
             }
             // Discount increases by 3 when there are 5 days or less
-            if (this.expiresIn <= 5) {
-              this.discountRateInPercent.updateDiscount(3);
+            if (this.discountOffers[i].expiresIn <= 5) {
+              this.discountOffers[i].updateDiscount(3);
             } else {
-              this.discountOffers.updateDiscount(1);
+              this.discountOffers[i].updateDiscount(1);
             }
           }
           break;
         case "Ilek":
           // Ilek discount never expires nor decreases.
-          this.discountOffers.updateDiscount(0, false);
+          this.discountOffers[i].updateDiscount(0, false);
           break;
         case "BackMarket":
           // Discounts decreases twice as fast as normal partners.
-          this.discountOffers.updateDiscount(-2);
+          this.discountOffers[i].updateDiscount(-2);
           break;
         default:
           if (this.discountOffers[i].expiresIn > 0) {
