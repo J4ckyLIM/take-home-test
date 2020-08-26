@@ -42,4 +42,9 @@ describe("Store", () => {
       new Store([new DiscountOffer("bidule", 0, 15)]).updateDiscounts()
     ).toEqual([new DiscountOffer("bidule", 0, 13)]);
   });
+  it("should decrease the expiresIn but the discount can't go higher than 50", () => {
+    expect(new Store([new DiscountOffer("bidule", 0, 60)])).toEqual([
+      new DiscountOffer("bidule", 0, 50)
+    ]);
+  });
 });
