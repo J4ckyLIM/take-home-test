@@ -23,6 +23,21 @@ module.exports = class Store {
           }
           break;
         case "Vinted":
+          // Discount drops to 0 after the expiration date
+          if (this.expiresIn === 0) {
+            this.discountOffers.updateDiscount(-this.discountRateInPercent);
+          } else {
+            // Discount increases by 2 when there are 10 days or less
+            if (this.expiresIn <= 10 && this.expiresIn > 5) {
+              this.discountOffers.updateDiscount(2);
+            }
+            // Discount increases by 3 when there are 5 days or less
+            if (this.expiresIn <= 5) {
+              this.discountRateInPercent.updateDiscount(3);
+            } else {
+              this.discountOffers.updateDiscount(1);
+            }
+          }
           break;
         case "Ilek":
           break;
