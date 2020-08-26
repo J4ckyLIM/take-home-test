@@ -11,58 +11,25 @@ module.exports = class Store {
    */
   updateDiscounts() {
     for (var i = 0; i < this.discountOffers.length; i++) {
-      if (
-        this.discountOffers[i].partnerName != "Naturalia" &&
-        this.discountOffers[i].partnerName != "Vinted"
-      ) {
-        if (this.discountOffers[i].discountInPercent > 0) {
-          if (this.discountOffers[i].partnerName != "Ilek") {
-            this.discountOffers[i].updateProperty("discountInPercent", -1);
+      this.discountOffers[i];
+      switch (this.discountOffers[i].partnerName) {
+        case "Naturalia":
+          break;
+        case "Vinted":
+          break;
+        case "Ilek":
+          break;
+        case "BackMarket":
+          break;
+        default:
+          if (this.discountOffers[i].expiresIn > 0) {
+            this.discountOffers[i].updateDiscount(-1);
           }
-        }
-      } else {
-        if (this.discountOffers[i].discountInPercent < 50) {
-          this.discountOffers[i].updateProperty("discountInPercent", 1);
-          if (this.discountOffers[i].partnerName == "Vinted") {
-            if (this.discountOffers[i].expiresIn < 11) {
-              if (this.discountOffers[i].discountInPercent < 50) {
-                this.discountOffers[i].updateProperty("discountInPercent", 1);
-              }
-            }
-            if (this.discountOffers[i].expiresIn < 6) {
-              if (this.discountOffers[i].discountInPercent < 50) {
-                this.discountOffers[i].updateProperty("discountInPercent", 1);
-              }
-            }
+          // Case when expiration date has passed
+          else {
+            this.discountOffers[i].updateDiscount(-2);
           }
-        }
-      }
-      if (this.discountOffers[i].partnerName != "Ilek") {
-        this.discountOffers[i].updateProperty("expiresIn", -1);
-      }
-      // Expiration date passed
-      if (this.discountOffers[i].expiresIn < 0) {
-        if (this.discountOffers[i].partnerName != "Naturalia") {
-          if (this.discountOffers[i].partnerName != "Vinted") {
-            if (this.discountOffers[i].discountInPercent > 0) {
-              if (this.discountOffers[i].partnerName != "Ilek") {
-                this.discountOffers[i].updateProperty("discountInPercent", -2);
-              }
-            }
-          } else {
-            // Case Vinted
-            // Discount is set to 0
-            this.discountOffers[i].updateProperty(
-              "discountInPercent",
-              -this.discountOffers[i].discountInPercent
-            );
-          }
-        } else {
-          // Case Naturalia
-          if (this.discountOffers[i].discountInPercent < 50) {
-            this.discountOffers[i].updateProperty("discountInPercent", 2);
-          }
-        }
+          break;
       }
     }
 
