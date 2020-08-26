@@ -7,6 +7,9 @@ module.exports = class DiscountOffer {
   constructor(partnerName, expiresIn, discountRateInPercent) {
     this.partnerName = partnerName;
     this.expiresIn = expiresIn;
+    if (discountRateInPercent >= 50) {
+      discountRateInPercent = 50;
+    }
     this.discountInPercent = discountRateInPercent;
   }
 
