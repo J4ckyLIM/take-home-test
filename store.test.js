@@ -27,4 +27,14 @@ describe("Store", () => {
       new Store([new DiscountOffer("BackMarket", 15, 42)]).updateDiscounts()
     ).toEqual([new DiscountOffer("BackMarket", 14, 40)]);
   });
+  it("should have discount increased by 2 after expiration date", () => {
+    expect(
+      new Store([new DiscountOffer("Naturalia", 0, 16)]).updateDiscounts()
+    ).toEqual([new DiscountOffer("Naturalia", 0, 18)]);
+  });
+  it("should have discount increased by 1 and expiresIn decreased by 1", () => {
+    expect(
+      new Store([new DiscountOffer("Naturalia", 30, 16)]).updateDiscounts()
+    ).toEqual([new DiscountOffer("Naturalia", 29, 17)]);
+  });
 });
