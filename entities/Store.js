@@ -42,6 +42,8 @@ module.exports = class Store {
         case "Ilek":
           break;
         case "BackMarket":
+          // Discounts decreases twice as fast as normal partners.
+          this.discountOffers.updateDiscount(-2);
           break;
         default:
           if (this.discountOffers[i].expiresIn > 0) {
