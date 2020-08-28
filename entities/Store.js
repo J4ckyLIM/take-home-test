@@ -11,7 +11,6 @@ module.exports = class Store {
    */
   updateDiscounts() {
     for (var i = 0; i < this.discountOffers.length; i++) {
-      this.discountOffers[i];
       switch (this.discountOffers[i].partnerName) {
         case "Naturalia":
           if (this.discountOffers[i].expiresIn > 0) {
@@ -39,7 +38,8 @@ module.exports = class Store {
             // Discount increases by 3 when there are 5 days or less
             if (this.discountOffers[i].expiresIn <= 5) {
               this.discountOffers[i].updateDiscount(3);
-            } else {
+            }
+            if (this.discountOffers[i].expiresIn > 10) {
               this.discountOffers[i].updateDiscount(1);
             }
           }

@@ -22,20 +22,16 @@ module.exports = class DiscountOffer {
   updateDiscount(value, expireDecrease = true) {
     if (this.expiresIn > 0 && expireDecrease) {
       this.expiresIn = this.expiresIn - 1; // ExpiresIn property decrease every day
+    }
+    // DiscountInPercent can't excess 50
+    if (this.discountInPercent + value >= 50 || this.discountInPercent >= 50) {
+      this.discountInPercent = 50;
     } else {
-      // DiscountInPercent can't excess 50
-      if (
-        this.discountInPercent + value >= 50 ||
-        this.discountInPercent >= 50
-      ) {
-        this.discountInPercent = 50;
+      // DiscountInPercent can't be lower than 0
+      if (this.discountInPercent + value <= 0) {
+        this.discountInPercent = 0;
       } else {
-        // DiscountInPercent can't be lower than 0
-        if (this.discountInPercent + value <= 0) {
-          this.discountInPercent = 0;
-        } else {
-          this.discountInPercent = this.discountInPercent + value;
-        }
+        this.discountInPercent = this.discountInPercent + value;
       }
     }
   }
